@@ -9,8 +9,8 @@ module.exports = {
 		app: './index.js',
 	},
 	output: {
-		path: path.resolve(__dirname, '../_site/assets/'),
-		filename: 'script.js',
+		path: path.resolve(__dirname, '../'),
+		filename: '_script.js',
 	},
 	module: {
 		rules: [
@@ -35,7 +35,7 @@ module.exports = {
 		],
 	},
 	plugins: [
-		new ExtractTextPlugin('style.css')
+		new ExtractTextPlugin('_style.css')
 	],
 	// Need this for some bug nonsense
 	node: {
