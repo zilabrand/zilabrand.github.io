@@ -1,6 +1,5 @@
 *.DS_Store
-_site/*
-!_site/assets/*
+_site/
 .sass-cache/
 .jekyll-metadata
 **/node_modules
