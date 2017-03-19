@@ -4,7 +4,6 @@ exclude:
   - GemFile
   - Gemfile.lock
   - README.md
-include:
-  # Prefix with underscores to separate from content
-  - _script.js
-  - _style.css
+keep_files:
+  # Compile assets right into _site
+  - assets
