@@ -1,5 +1,6 @@
 name: ZilaBrand.com
 repository: zilabrand/zilabrand.github.io
+permalink: pretty
 exclude:
   - GemFile
   - Gemfile.lock
