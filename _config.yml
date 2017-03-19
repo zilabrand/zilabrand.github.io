@@ -4,6 +4,7 @@ sass:
   sass_dir: _sass
   style: compressed
 include:
+  - _scripts.coffee
   - _styles.scss
 exclude:
   - GemFile
