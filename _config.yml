@@ -1,12 +1,10 @@
 name: ZilaBrand.com
 repository: zilabrand/zilabrand.github.io
-sass:
-  sass_dir: _sass
-  style: compressed
-include:
-  - _scripts.coffee
-  - _styles.scss
 exclude:
   - GemFile
   - Gemfile.lock
   - README.md
+include:
+  # Prefix with underscores to separate from content
+  - _script.js
+  - _style.css
