@@ -1,5 +1,10 @@
 name: ZilaBrand.com
 source: edit
+sass:
+  sass_dir: _sass
+  style: compressed
+include:
+  - _styles.scss
 exclude:
   - GemFile
   - Gemfile.lock
