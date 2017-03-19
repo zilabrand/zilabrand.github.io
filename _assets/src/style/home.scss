@@ -1,0 +1,30 @@
+.home {
+  margin: 50px auto;
+  max-width: 720px;
+  padding: 10px;
+}
+
+.home-gal-link {
+  display: block;
+  height: 150px;
+  background-size: cover;
+  background-position: center center;
+}
+
+@include desktop {
+  .home-gal-thirds {
+    display: flex;
+    margin-top: 20px;
+
+    .home-gal-link {
+      flex: 1;
+
+      margin-left: 10px;
+      margin-right: 10px;
+
+      &:first-child { margin-left: 0; }
+
+      &:last-child { margin-right: 0; }
+    }
+  }
+}
