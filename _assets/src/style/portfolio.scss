@@ -1,0 +1,30 @@
+.portfolio {
+  max-width: 720px;
+  margin: 50px auto;
+}
+
+.portfolio-images {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -10px;
+  margin-left: -10px;
+}
+
+.portfolio-image {
+  flex: 1 0;
+  flex-basis: 33.33333%;
+  max-width: 33.333333%;
+  margin-top: 20px;
+  box-sizing: border-box;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-clip: content-box;
+  background-size: cover;
+  background-position: center center;
+
+  &::before {
+    content: '';
+    display: block;
+    padding-bottom: 100%; // Square
+  }
+}

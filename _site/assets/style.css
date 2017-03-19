@@ -125,3 +125,35 @@ a {
         margin-left: 0; }
       .home-gal-thirds .home-gal-link:last-child {
         margin-right: 0; } }
+
+.portfolio {
+  max-width: 720px;
+  margin: 50px auto; }
+
+.portfolio-images {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  margin-right: -10px;
+  margin-left: -10px; }
+
+.portfolio-image {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 0;
+          flex: 1 0;
+  -ms-flex-preferred-size: 33.33333%;
+      flex-basis: 33.33333%;
+  max-width: 33.333333%;
+  margin-top: 20px;
+  box-sizing: border-box;
+  padding-right: 10px;
+  padding-left: 10px;
+  background-clip: content-box;
+  background-size: cover;
+  background-position: center center; }
+  .portfolio-image::before {
+    content: '';
+    display: block;
+    padding-bottom: 100%; }
