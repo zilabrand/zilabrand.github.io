@@ -8,3 +8,4 @@ include:
 exclude:
   - GemFile
   - Gemfile.lock
+  - README.md
