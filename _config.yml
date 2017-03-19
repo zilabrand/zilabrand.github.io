@@ -1,9 +1,10 @@
 name: ZilaBrand.com
 repository: zilabrand/zilabrand.github.io
+permalink: pretty
 exclude:
   - GemFile
   - Gemfile.lock
   - README.md
-keep_files:
-  # Compile assets right into _site
-  - assets
+include:
+  - _script.js
+  - _style.css
