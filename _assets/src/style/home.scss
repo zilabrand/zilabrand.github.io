@@ -1,0 +1,74 @@
+.home {
+  margin: 50px auto;
+  max-width: 720px;
+  padding: 10px;
+}
+
+.home-content {
+  margin: 0 auto 50px;
+  max-width: 500px;
+}
+
+.home-gal-link {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  text-align: center;
+  font-size: 21px;
+  text-shadow: 0 1px 2px rgba(#000, .5), 0 0 15px rgba(#000, .5);
+  text-transform: uppercase;
+
+  background-size: cover;
+  background-position: center center;
+
+  @include mobile { margin-top: 20px; };
+
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    background: rgba(#000, .1);
+    transition: background 150ms ease-in-out;
+  }
+
+  &:hover::before {
+    background: rgba(#000, .2);
+    transition-duration: 75ms;
+  }
+
+  span {
+    display: block;
+    margin-top: auto;
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    background: rgba(#000, .3);
+  }
+
+  @include desktop {    
+    &.home-gal-main {
+      height: 200px;
+      font-size: 24px;
+    }
+  }
+}
+
+@include desktop {
+  .home-gal-thirds {
+    display: flex;
+    margin-top: 20px;
+
+    .home-gal-link {
+      flex: 1;
+
+      margin-left: 10px;
+      margin-right: 10px;
+
+      &:first-child { margin-left: 0; }
+
+      &:last-child { margin-right: 0; }
+    }
+  }
+}

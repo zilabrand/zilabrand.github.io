@@ -1,12 +1,9 @@
 name: ZilaBrand.com
 repository: zilabrand/zilabrand.github.io
-sass:
-  sass_dir: _sass
-  style: compressed
-include:
-  - _scripts.coffee
-  - _styles.scss
 exclude:
   - GemFile
   - Gemfile.lock
   - README.md
+keep_files:
+  # Compile assets right into _site
+  - assets
