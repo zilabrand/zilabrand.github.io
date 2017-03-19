@@ -3,23 +3,25 @@ layout: default
 ---
 
 <main class="home">
-  {{ content }}
+  <div class="home-content">
+    {{ content }}
+  </div>
 
   <a class="home-gal-link home-gal-main home-decor" href="/home-decor/" style="background-image: url({{ page.images.home_decor }})">
-    Home Decor
+    <span>Home Decor</span>
   </a>
 
   <div class="home-gal-thirds">
     <a class="home-gal-link fashion" href="/fashion/" style="background-image: url({{ page.images.fashion }})">
-      Fashion
+      <span>Fashion</span>
     </a>
 
     <a class="home-gal-link detail-work" href="/detail-work/" style="background-image: url({{ page.images.detail_work }})">
-      Detail Work
+      <span>Detail Work</span>
     </a>
 
     <a class="home-gal-link metal-work" href="/metal-work/" style="background-image: url({{ page.images.metal_work }})">
-      Metal Work
+      <span>Metal Work</span>
     </a>
   </div>
 </main>
