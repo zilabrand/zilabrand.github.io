@@ -1,4 +1,5 @@
 name: ZilaBrand.com
+repository: zilabrand/zilabrand.github.io
 sass:
   sass_dir: _sass
   style: compressed
