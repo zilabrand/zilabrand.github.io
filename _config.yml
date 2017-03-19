@@ -1,0 +1,5 @@
+name: ZilaBrand.com
+source: edit
+exclude:
+  - GemFile
+  - Gemfile.lock
