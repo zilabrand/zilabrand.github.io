@@ -7,7 +7,47 @@ body {
   letter-spacing: .25px;
 }
 
+.container {
+  max-width: 960px;
+  margin: 50px auto;
+}
+
 a {
   color: #f2f2f2;
   text-decoration: none;
+}
+
+header {
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+
+  li {
+
+    &:not(.active) {
+      opacity: .75;
+      transition: opacity 150ms ease-in-out;
+
+      &:hover {
+        opacity: 1;
+        transition-duration: 75ms;
+      }
+    }
+  }
+
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    nav ul {
+      display: flex;
+
+      li {
+        margin-left: 10px;
+      }
+    }
+  }
 }

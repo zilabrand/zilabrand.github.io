@@ -7,7 +7,27 @@
   </head>
 
   <body>
-    {{ content }}
+    <header class="container">
+      <h2>
+        <a href="/">Zila Brand</a>
+      </h2>
+
+      <nav>
+        <ul>
+          {% for nav_page in site.pages %}
+            {% if nav_page.url != '/' %}
+              <li class="{% if page.url == nav_page.url %}active{% endif %}">
+                <a href="{{ nav_page.url }}">{{ nav_page.title }}</a><br />
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      {{ content }}
+    </main>
 
     <script type="text/javascript" src="/_script.js"></script>
   </body>

@@ -1,8 +1,3 @@
-.portfolio {
-  max-width: 720px;
-  margin: 50px auto;
-}
-
 .portfolio-images {
   display: flex;
   flex-wrap: wrap;
@@ -10,21 +5,38 @@
   margin-left: -10px;
 }
 
-.portfolio-image {
+$spacing: 5px;
+
+.portfolio-image,
+.portfolio-content {
   flex: 1 0;
-  flex-basis: 33.33333%;
-  max-width: 33.333333%;
-  margin-top: 20px;
+  flex-basis: 25%;
+  max-width: 25%;
+  margin-top: $spacing * 2;
   box-sizing: border-box;
-  padding-right: 10px;
-  padding-left: 10px;
-  background-clip: content-box;
-  background-size: cover;
-  background-position: center center;
+  padding-right: $spacing;
+  padding-left: $spacing;
 
   &::before {
     content: '';
     display: block;
     padding-bottom: 100%; // Square
   }
+}
+
+.portfolio-content {
+  position: relative;
+
+  > div {
+    position: absolute;
+    top: 0; right: $spacing; bottom: 0; left: $spacing;
+    padding: 8px;
+    border: 1px solid #969696;
+  }
+}
+
+.portfolio-image {
+  background-clip: content-box;
+  background-size: cover;
+  background-position: center center;
 }

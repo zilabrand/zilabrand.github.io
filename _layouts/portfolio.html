@@ -2,14 +2,14 @@
 layout: default
 ---
 
-<main class="portfolio">
-  <section class="portfolio-content">
-    {{ content }}
-  </section>
+<section class="portfolio-images">
+  <div class="portfolio-content">
+    <div>
+      {{ content }}
+    </div>
+  </div>
 
-  <section class="portfolio-images">
-    {% for image in page.images %}
-      <div class="portfolio-image" style="background-image: url({{ image.src }})"></div>
-    {% endfor %}
-  </section>
-</main>
+  {% for image in page.images %}
+    <div class="portfolio-image" style="background-image: url({{ image.src }})"></div>
+  {% endfor %}
+</section>
