@@ -1,13 +1,26 @@
-$breakpoint: 679px;
+$narrow: 820px;
+$mobile: 679px;
 
 @mixin desktop {
-  @media (min-width: $breakpoint + 1px) {
+  @media (min-width: $mobile + 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-wide {
+  @media (min-width: $narrow + 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-narrow {
+  @media (min-width: $mobile + 1px) and (max-width: $narrow) {
     @content;
   }
 }
 
 @mixin mobile {
-  @media (max-width: $breakpoint) {
+  @media (max-width: $mobile) {
     @content;
   }
 }
