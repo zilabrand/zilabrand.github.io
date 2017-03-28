@@ -1,4 +1,7 @@
 export function initSlideshow(el, start, duration, transitionCallback) {
+  duration = duration || 1000
+  transitionCallback = transitionCallback || () => {}
+
   let slides = el.querySelectorAll('.slide')
 
   let current = start || 0
