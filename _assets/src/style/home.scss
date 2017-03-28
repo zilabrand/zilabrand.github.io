@@ -53,15 +53,15 @@
 }
 
 @include desktop {
-  .home-gal-thirds {
+  .home-gal-cols {
     display: flex;
-    margin-top: 18px;
+    margin-top: 12px;
 
     .home-gal-link {
       flex: 1;
 
-      margin-left: 9px;
-      margin-right: 9px;
+      margin-left: 6px;
+      margin-right: 6px;
 
       &:first-child { margin-left: 0; }
 
