@@ -6,9 +6,9 @@ main_link:
   image: http://127.0.0.1:4000/DSC07230.JPG
   link: /home-decor/
 secondary_links:
-  - label: Home Decor
+  - label: Fashion
     image: http://127.0.0.1:4000/DSC07230.JPG
-    link: /home-decor/
+    link: /fashion/
   - label: Detail Work
     image: http://127.0.0.1:4000/DSC07230.JPG
     link: /detail-work/
