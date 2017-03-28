@@ -1,12 +1,12 @@
 .home-content {
-  margin: 0 auto 50px;
+  margin: 0 auto 48px;
   max-width: 500px;
 }
 
 .home-gal-link {
   display: flex;
   flex-direction: column;
-  height: 150px;
+  height: 192px;
   text-align: center;
   font-size: 21px;
   text-shadow: 0 1px 2px rgba(#000, .5), 0 0 15px rgba(#000, .5);
@@ -18,6 +18,8 @@
   @include mobile { margin-top: 20px; };
 
   position: relative;
+
+  overflow: hidden; // Clip box shadow on span
 
   &::before {
     content: '';
@@ -37,13 +39,14 @@
     margin-top: auto;
     position: relative;
     z-index: 2;
-    padding: 10px;
+    padding: 11px 3px 7px;
     background: rgba(#000, .3);
+    box-shadow: 0 0 10px 1px rgba(#000, .25);
   }
 
   @include desktop {
     &.home-gal-main {
-      height: 200px;
+      height: 240px;
       font-size: 24px;
     }
   }
@@ -52,13 +55,13 @@
 @include desktop {
   .home-gal-thirds {
     display: flex;
-    margin-top: 20px;
+    margin-top: 18px;
 
     .home-gal-link {
       flex: 1;
 
-      margin-left: 10px;
-      margin-right: 10px;
+      margin-left: 9px;
+      margin-right: 9px;
 
       &:first-child { margin-left: 0; }
 
