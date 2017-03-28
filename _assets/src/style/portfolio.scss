@@ -80,6 +80,13 @@ $spacing: 6px;
   background-color: rgba(#fff, .1);
   cursor: pointer;
 
+  transition: opacity 150ms ease-in-out;
+
+  &:hover {
+    transition-duration: 75ms;
+    opacity: .75;
+  }
+
   @include mobile {
     flex-basis: 50%;
     max-width: 50%;
