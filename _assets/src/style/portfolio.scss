@@ -38,8 +38,8 @@ $spacing: 6px;
   }
 
   @include desktop-narrow {
-    flex-basis: 33%;
-    max-width: 33%;
+    flex-basis: 33.333333%;
+    max-width: 33.333333%;
   }
 
   @include desktop-wide {
