@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "NODE_ENV=dev webpack -d --progress",
-    "watch": "NODE_ENV=dev webpack -d --progress --watch",
+    "watch": "NODE_ENV=prod webpack -p --progress --watch",
     "prod": "NODE_ENV=prod webpack -p --progress"
   },
   "devDependencies": {
