@@ -19,7 +19,7 @@ export function createGallery(el) {
     initSlideshow(galContent, index, 500, (to) => {
       let slide = slides[to]
       if(!slide.getElementsByTagName('img')){
-        let img = new Image();
+        let img = new Image()
         img.src = galItems[to].src
         slide.appendChild(img)
       }
