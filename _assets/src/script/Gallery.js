@@ -11,8 +11,8 @@ export function createGallery(el) {
   let show = function(index) {
     let slides = map(galItems, () => {
       let slide = document.createElement('div')
-      slide.classname = 'slide'
-      galContent.appendChild(div)
+      slide.classList.add('slide')
+      galContent.appendChild(slide)
       return slide
     })
 
