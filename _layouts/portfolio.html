@@ -12,6 +12,9 @@ layout: default
   </div>
 
   {% for image in page.images %}
-    <div class="portfolio-image gal-item" style="background-image: url({{ image.src }})"></div>
+    <div class="portfolio-image gal-item"
+      style="background-image: url({{ image.src }})"
+      data-src="{{ image.src }}"
+    ></div>
   {% endfor %}
 </section>
