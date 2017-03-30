@@ -33,12 +33,12 @@ export function createGallery(el) {
     galContent.innerHTML = ''
   }
 
-  let galItems = map(el.querySelectorAll('.gal-item'), itemEl, index => {
+  let galItems = map(el.querySelectorAll('.gal-item'), (itemEl, index) => {
     itemEl.addEventListener('click', () => show(index))
 
     return {
       el: itemEl,
-      src = itemEl.getAttribute('data-src'),
+      src: itemEl.getAttribute('data-src'),
     }
   })
 

@@ -1,6 +1,8 @@
+import { each } from 'lodash'
+
 export function initSlideshow(el, start, duration, transitionCallback) {
   duration = duration || 1000
-  transitionCallback = transitionCallback || () => {}
+  transitionCallback = transitionCallback || (() => {})
 
   let slides = el.querySelectorAll('.slide')
 
@@ -34,7 +36,7 @@ export function initSlideshow(el, start, duration, transitionCallback) {
   return {
     start: function(){
       if(!interval){
-        interval = setInterval(next, duration);
+        interval = setInterval(next, duration)
       }
     },
     stop: function(){
