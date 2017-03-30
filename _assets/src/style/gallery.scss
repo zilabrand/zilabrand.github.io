@@ -1,1 +1,24 @@
 .gal-item { cursor: pointer; }
+
+.gal-container {
+  position: fixed;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(#000, .5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gal-content {
+  margin: 20px;
+}
+
+.gal-close {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 15px;
+  height: 15px;
+  background: #fff;
+  cursor: pointer;
+}
