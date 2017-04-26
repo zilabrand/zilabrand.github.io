@@ -1,4 +1,4 @@
-import { each } from 'lodash'
+import { each } from './util'
 
 import { createGallery } from './Gallery'
 

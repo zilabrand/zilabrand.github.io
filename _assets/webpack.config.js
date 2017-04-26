@@ -6,7 +6,14 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 module.exports = {
   context: path.resolve(__dirname, './src'),
   entry: {
-    app: './index.js',
+    app: './index.ts',
+  },
+  resolve: {
+    modules: [
+      'node_modules',
+      path.resolve(__dirname, 'src'),
+    ],
+    extensions: ['.ts', '.js', 'scss'],
   },
   output: {
     path: path.resolve(__dirname, '../_site/'),
@@ -16,16 +23,10 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
-        exclude: [/node_modules/],
-        use: [{
-          loader: 'babel-loader',
-          options: {
-            plugins: ['lodash'],
-            presets: [['es2015', { loose: true, modules: false }]],
-            ignore: /node_modules/,
-          },
-        }],
+        test: /\.ts$/,
+        use: {
+          loader: 'awesome-typescript-loader',
+        }
       },
       {
         test: /\.scss$/,

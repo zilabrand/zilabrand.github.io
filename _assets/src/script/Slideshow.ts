@@ -1,16 +1,16 @@
-import { each } from 'lodash'
+import { each } from './util'
 
-export function initSlideshow({el, start, duration, transitionCallback}={}) {
+export function initSlideshow({ el, start, duration, transitionCallback } = {}) {
   duration = duration || 1000
-  transitionCallback = transitionCallback || (() => {})
+  transitionCallback = transitionCallback || (() => { })
 
   let slides = el.querySelectorAll('.slide')
 
   let current = start || 0
 
-  let transition = function(to) {
+  let transition = function (to) {
     each(slides, (slide, i) => {
-      if(i !== to) {
+      if (i !== to) {
         slide.classList.remove('active')
       }
     })
@@ -19,12 +19,12 @@ export function initSlideshow({el, start, duration, transitionCallback}={}) {
     current = to
   }
 
-  let next = function() {
+  let next = function () {
     let to = (current + 1) % slides.length
     transition(to)
   }
 
-  let prev = function() {
+  let prev = function () {
     let to = (current - 1) % slides.length
     transition(to)
   }
@@ -48,13 +48,13 @@ export function initSlideshow({el, start, duration, transitionCallback}={}) {
 
   let interval = null
   return {
-    start: function(){
-      if(!interval){
+    start: function () {
+      if (!interval) {
         interval = setInterval(next, duration)
       }
     },
-    stop: function(){
-      if(interval){
+    stop: function () {
+      if (interval) {
         clearInterval(interval)
       }
     }

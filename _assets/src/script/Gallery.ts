@@ -1,4 +1,4 @@
-import { each, map } from 'lodash'
+import { each, map } from './util'
 import { initSlideshow } from './Slideshow'
 
 const galContainer = document.createElement('div')
@@ -14,20 +14,20 @@ closeButton.className = 'gal-close'
 
 galContainer.appendChild(closeButton)
 
-let close = function(){
+let close = function () {
   galContainer.remove()
   galContent.innerHTML = ''
 }
 
 closeButton.addEventListener('click', close)
 galContainer.addEventListener('click', (event) => {
-  if(event.target === galContainer){
+  if (event.target === galContainer) {
     close()
   }
 })
 
 export function createGallery(el) {
-  let show = function(index){
+  let show = function (index) {
     let slides = map(galItems, () => {
       let slide = document.createElement('div')
       slide.className = 'slide'
@@ -41,7 +41,7 @@ export function createGallery(el) {
       duration: 500,
       transitionCallback(to) {
         let slide = slides[to]
-        if(!slide.getElementsByTagName('img').length){
+        if (!slide.getElementsByTagName('img').length) {
           let img = new Image()
           img.src = galItems[to].src
           slide.appendChild(img)
