@@ -5,7 +5,7 @@ const galContainer = document.createElement('div')
 galContainer.className = 'gal-container'
 
 const galContent = document.createElement('div')
-galContent.className = 'gal-content'
+galContent.className = 'gal-content slideshow'
 
 galContainer.appendChild(galContent)
 

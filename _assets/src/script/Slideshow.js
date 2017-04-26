@@ -1,6 +1,6 @@
 import { each } from 'lodash'
 
-export function initSlideshow(el, start, duration, transitionCallback) {
+export function initSlideshow({el, start, duration, transitionCallback}={}) {
   duration = duration || 1000
   transitionCallback = transitionCallback || (() => {})
 
@@ -28,6 +28,20 @@ export function initSlideshow(el, start, duration, transitionCallback) {
     let to = (current - 1) % slides.length
     transition(to)
   }
+
+  // Add controls!
+  const nextButton = document.createElement('div')
+  nextButton.className = 'slide-next'
+  const prevButton = document.createElement('div')
+  prevButton.className = 'slide-next'
+
+  nextButton.addEventListener('click', next)
+  prevButton.addEventListener('click', prev)
+
+  el.appendChild(nextButton)
+  el.appendChild(prevButton)
+
+  each(slides, (slide) => slide.addEventListener('click', next))
 
   // Initialize
   transition(current)
