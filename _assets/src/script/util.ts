@@ -1,8 +1,12 @@
-function nodeListToArray(o: any): Array<any> | object {
+type Dictionary = {
+  [key: string]: any
+};
+
+function nodeListToArray(o: any): Array<any> | Dictionary {
   return o instanceof NodeList ? [].slice.call(o) : o;
 }
 
-export function each(o: Array<any> | NodeList | object, fn: (v: any, k: number | string, o: object | Array<any>) => void): void {
+export function each(o: Array<any> | NodeList | Dictionary, fn: (v: any, k: number | string, o: Dictionary | Array<any>) => void): void {
   o = nodeListToArray(o);
   if (Array.isArray(o)) {
     o.forEach(fn);
@@ -16,13 +20,13 @@ export function each(o: Array<any> | NodeList | object, fn: (v: any, k: number |
   }
 }
 
-export function map(o: Array<any> | NodeList | object, fn: (v: any, k: number | string, o: object | Array<any>) => any): any {
+export function map(o: Array<any> | NodeList | Dictionary, fn: (v: any, k: number | string, o: Dictionary | Array<any>) => any): any {
   o = nodeListToArray(o);
   if (Array.isArray(o)) {
     return o.map(fn);
   }
   else {
-    let r = {};
+    let r: Dictionary = {};
     for (let k in o) {
       if (o.hasOwnProperty(k)) {
         r[k] = fn(k, o[k], o);
