@@ -4,21 +4,27 @@
   position: fixed;
   top: 0; right: 0; bottom: 0; left: 0;
   background: rgba(#000, .5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
-.gal-content {
+.gal-content.slideshow {
   margin: 20px;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
 }
 
 .gal-close {
   position: fixed;
+  z-index: 10;
   top: 20px;
   right: 20px;
-  width: 15px;
-  height: 15px;
-  background: #fff;
+
   cursor: pointer;
+  color: #fff;
+  font-weight: bold;
+  padding: 3px 5px;
+  background: rgba(#fff, .1);
+  &:hover { background: rgba(#fff, .3); }
+
+  // Unicode X
+  &:before { content: '\2715'; }
 }

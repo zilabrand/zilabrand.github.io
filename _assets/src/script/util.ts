@@ -46,3 +46,25 @@ export function each<T>(collection: List<T> | Dictionary<T>, iteratee: ListItera
     }
   }
 }
+
+function assign(to: Dictionary<any>, ...froms: Dictionary<any>[]): Dictionary<any> {
+  each(froms, from => each(from, (v, k) => to[k] = v));
+  return to;
+}
+
+type EventListenerDictionary = {
+  [K in keyof DocumentEventMap]?: EventListenerOrEventListenerObject
+}
+
+export function createElement<K extends keyof HTMLElementTagNameMap>(
+  tag: K,
+  attrs?: Dictionary<string>,
+  listeners?: EventListenerDictionary,
+  ...children: Node[],
+): HTMLElementTagNameMap[K] {
+  let el = document.createElement(tag)
+  assign(el, attrs)
+  each(listeners, (listener, type) => el.addEventListener(type, listener));
+  each(children, child => el.appendChild(child))
+  return el;
+}

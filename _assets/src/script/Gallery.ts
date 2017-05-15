@@ -41,7 +41,7 @@ export function createGallery(el: HTMLElement): void {
     })
 
     initSlideshow(galContent, {
-      start: index,
+      startAt: index,
       duration: 500,
       transitionCallback(to) {
         let slide = slides[to]

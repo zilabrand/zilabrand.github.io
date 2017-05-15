@@ -1,4 +1,7 @@
-import { each } from './util'
+import {
+  createElement,
+  each,
+} from './util'
 
 interface Slideshow {
   start: () => void
@@ -6,22 +9,22 @@ interface Slideshow {
 }
 
 export function initSlideshow(el: HTMLElement, {
-  start,
+  startAt,
   duration,
   transitionCallback
 }: {
-    start?: number,
+    startAt?: number,
     duration?: number,
     transitionCallback?: (to: number) => void
   } = {
-    start: 0,
+    startAt: 0,
     duration: 1000,
     transitionCallback: to => undefined
   }
 ): Slideshow {
   let slides = el.querySelectorAll('.slide')
 
-  let current = start
+  let current = startAt
 
   let transition = function (to: number) {
     each(slides, (slide, i) => {
@@ -44,35 +47,55 @@ export function initSlideshow(el: HTMLElement, {
     transition(to)
   }
 
+  let interval: number;
+
+  el.classList.add('paused');
+
+  let start = function (): void {
+    if (!interval) {
+      interval = setInterval(next, duration)
+      el.classList.remove('paused')
+      el.classList.add('playing')
+    }
+  }
+
+  let stop = function (): void {
+    if (interval) {
+      clearInterval(interval)
+      el.classList.remove('playing')
+      el.classList.add('paused')
+    }
+  }
+
   // Add controls!
-  const nextButton = document.createElement('div')
-  nextButton.className = 'slide-next'
-  const prevButton = document.createElement('div')
-  prevButton.className = 'slide-next'
+  el.appendChild(createElement(
+    'div',
+    { className: 'controls' },
+    {},
+    createElement(
+      'div',
+      { className: 'prev' },
+      { click: prev }
+    ),
+    createElement(
+      'div',
+      { className: 'pause-play' },
+      { click: () => (interval ? stop : start)() }
+    ),
+    createElement(
+      'div',
+      { className: 'next' },
+      { click: next }
+    )
+  ))
 
-  nextButton.addEventListener('click', next)
-  prevButton.addEventListener('click', prev)
-
-  el.appendChild(nextButton)
-  el.appendChild(prevButton)
-
-  each(slides, (slide) => slide.addEventListener('click', next))
+  each(slides, slide => slide.addEventListener('click', next))
 
   // Initialize
   transition(current)
 
-  let interval: number;
-
   return {
-    start: function () {
-      if (!interval) {
-        interval = setInterval(next, duration)
-      }
-    },
-    stop: function () {
-      if (interval) {
-        clearInterval(interval)
-      }
-    }
+    start: start,
+    stop: stop,
   }
 }
