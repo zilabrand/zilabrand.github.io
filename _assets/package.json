@@ -1,6 +1,5 @@
 {
   "name": "zilabrand.com",
-  "version": "0.24.1",
   "main": "src/index.js",
   "author": "Giaco Corsiglia <GiacoCorsiglia@gmail.com>",
   "license": "MIT",
