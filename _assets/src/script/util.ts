@@ -1,65 +1,48 @@
-interface List<T> {
-  [index: number]: T;
-  length: number;
-}
+type List<T> = T[] | NodeList;
 
 interface Dictionary<T> {
   [key: string]: T;
 }
 
-type ListIterator<T, U> = (value: T, index: number, collection: List<T>) => U;
-type DictionaryIterator<T, U> = (value: T, key: string, collection: Dictionary<T>) => U;
+type ListIteratee<T, U> = (value: T, index: number, collection: List<T>) => U;
+type DictionaryIteratee<T, U> = (value: T, key: string, collection: Dictionary<T>) => U;
 
-function mapDict<T, U>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, U>): Dictionary<U> {
-  let ret: Dictionary<U> = {};
-  for (let key in collection) {
-    if (collection.hasOwnProperty(key)) {
-      ret[key] = iteratee(collection[key], key, collection);
-    }
-  }
-  return ret;
+function isList<T>(collection: List<T> | Dictionary<T>): collection is List<T> {
+  return Array.isArray(collection) || collection instanceof NodeList;
 }
 
-function mapList<T, U>(collection: List<T>, iteratee: ListIterator<T, U>): U[] {
-  collection = collection instanceof NodeList ? [].slice.call(collection) : collection;
-  return (<Array<T>>collection).map(iteratee);
+function listToArray<T>(list: List<T>): T[] {
+  return list instanceof NodeList ? [].slice.call(list) : list;
 }
 
-function eachDict<T>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, void>): void {
-  for (let key in collection) {
-    if (collection.hasOwnProperty(key)) {
-      iteratee(collection[key], key, collection);
-    }
-  }
-}
-
-function eachList<T>(collection: List<T>, iteratee: ListIterator<T, void>): void {
-  collection = collection instanceof NodeList ? [].slice.call(collection) : collection;
-  (<Array<T>>collection).forEach(iteratee);
-}
-
-function isDictionary<T>(collection: any): collection is Dictionary<T> {
-  return typeof collection === 'object' && collection !== null;
-}
-
-export function map<T, U>(collection: List<T>, iteratee: ListIterator<T, U>): U[];
-export function map<T, U>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, U>): Dictionary<U>;
-export function map<T, U>(collection: List<T> | Dictionary<T>, iteratee: ListIterator<T, U> | DictionaryIterator<T, U>): U[] | Dictionary<U> {
-  if (isDictionary<T>(collection)) {
-    return mapDict(collection, <DictionaryIterator<T, U>>iteratee);
+export function map<T, U>(collection: List<T>, iteratee: ListIteratee<T, U>): U[];
+export function map<T, U>(collection: Dictionary<T>, iteratee: DictionaryIteratee<T, U>): Dictionary<U>;
+export function map<T, U>(collection: List<T> | Dictionary<T>, iteratee: ListIteratee<T, U> | DictionaryIteratee<T, U>): U[] | Dictionary<U> {
+  if (isList(collection)) {
+    return listToArray(collection).map(<ListIteratee<T, U>>iteratee);
   }
   else {
-    return mapList(collection, <ListIterator<T, U>>iteratee);
+    let ret: Dictionary<U> = {};
+    for (let key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        ret[key] = (<DictionaryIteratee<T, U>>iteratee)(collection[key], key, collection);
+      }
+    }
+    return ret;
   }
 }
 
-export function each<T>(collection: List<T>, iteratee: ListIterator<T, void>): void;
-export function each<T>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, void>): void;
-export function each<T>(collection: List<T> | Dictionary<T>, iteratee: ListIterator<T, void> | DictionaryIterator<T, void>): void {
-  if (isDictionary<T>(collection)) {
-    eachDict(collection, <DictionaryIterator<T, void>>iteratee);
+export function each<T>(collection: List<T>, iteratee: ListIteratee<T, void>): void;
+export function each<T>(collection: Dictionary<T>, iteratee: DictionaryIteratee<T, void>): void;
+export function each<T>(collection: List<T> | Dictionary<T>, iteratee: ListIteratee<T, void> | DictionaryIteratee<T, void>): void {
+  if (isList(collection)) {
+    listToArray(collection).forEach(<ListIteratee<T, void>>iteratee);
   }
   else {
-    eachList(collection, <ListIterator<T, void>>iteratee);
+    for (let key in collection) {
+      if (collection.hasOwnProperty(key)) {
+        (<DictionaryIteratee<T, void>>iteratee)(collection[key], key, collection);
+      }
+    }
   }
 }
