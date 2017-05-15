@@ -38,10 +38,6 @@ module.exports = {
     ],
   },
   plugins: [
-    new ExtractTextPlugin('_style.css')
+    new ExtractTextPlugin('_style.css'),
   ],
-	// Need this for some bug nonsense
-  // node: {
-    // fs: 'empty',
-  // },
 }
