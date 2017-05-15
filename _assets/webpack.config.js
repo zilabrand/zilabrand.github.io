@@ -4,14 +4,14 @@ const path = require('path')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
 
 module.exports = {
-  context: path.resolve(__dirname, './src'),
+  context: path.join(__dirname, 'src'),
   entry: {
-    app: './index.ts',
+    app: 'index.ts',
   },
   resolve: {
     modules: [
       'node_modules',
-      path.resolve(__dirname, 'src'),
+      path.join(__dirname, 'src'),
     ],
     extensions: ['.ts', '.js', 'scss'],
   },
@@ -41,7 +41,7 @@ module.exports = {
     new ExtractTextPlugin('_style.css')
   ],
 	// Need this for some bug nonsense
-  node: {
-    fs: 'empty',
-  },
+  // node: {
+    // fs: 'empty',
+  // },
 }
