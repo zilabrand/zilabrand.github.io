@@ -19,7 +19,7 @@
     "reset-css": "^2.2.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.13.2",
-    "typescript": "^2.2.2",
+    "typescript": "^2.3",
     "webpack": "^2.2.1"
   }
 }
