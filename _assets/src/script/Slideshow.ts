@@ -1,14 +1,29 @@
 import { each } from './util'
 
-export function initSlideshow({ el, start, duration, transitionCallback } = {}) {
-  duration = duration || 1000
-  transitionCallback = transitionCallback || (() => { })
+interface Slideshow {
+  start: () => void
+  stop: () => void
+}
 
+export function initSlideshow(el: HTMLElement, {
+  start,
+  duration,
+  transitionCallback
+}: {
+    start?: number,
+    duration?: number,
+    transitionCallback?: (to: number) => void
+  } = {
+    start: 0,
+    duration: 1000,
+    transitionCallback: to => undefined
+  }
+): Slideshow {
   let slides = el.querySelectorAll('.slide')
 
-  let current = start || 0
+  let current = start
 
-  let transition = function (to) {
+  let transition = function (to: number) {
     each(slides, (slide, i) => {
       if (i !== to) {
         slide.classList.remove('active')
@@ -46,7 +61,8 @@ export function initSlideshow({ el, start, duration, transitionCallback } = {}) 
   // Initialize
   transition(current)
 
-  let interval = null
+  let interval: number;
+
   return {
     start: function () {
       if (!interval) {

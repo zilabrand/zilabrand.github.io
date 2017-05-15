@@ -1,4 +1,4 @@
-import { each, map } from './util'
+import { map } from './util'
 import { initSlideshow } from './Slideshow'
 
 const galContainer = document.createElement('div')
@@ -26,8 +26,13 @@ galContainer.addEventListener('click', (event) => {
   }
 })
 
-export function createGallery(el) {
-  let show = function (index) {
+interface GalItem {
+  el: Element
+  src: string
+}
+
+export function createGallery(el: HTMLElement): void {
+  let show = function (index: number) {
     let slides = map(galItems, () => {
       let slide = document.createElement('div')
       slide.className = 'slide'
@@ -35,8 +40,7 @@ export function createGallery(el) {
       return slide
     })
 
-    initSlideshow({
-      el: galContent,
+    initSlideshow(galContent, {
       start: index,
       duration: 500,
       transitionCallback(to) {
@@ -52,7 +56,7 @@ export function createGallery(el) {
     document.documentElement.appendChild(galContainer)
   }
 
-  let galItems = map(el.querySelectorAll('.gal-item'), (itemEl, index) => {
+  let galItems = map(el.querySelectorAll('.gal-item'), (itemEl, index): GalItem => {
     itemEl.addEventListener('click', () => show(index))
 
     return {

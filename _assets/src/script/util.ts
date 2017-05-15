@@ -1,37 +1,39 @@
-type Dictionary = {
-  [key: string]: any
-};
-
-function nodeListToArray(o: any): Array<any> | Dictionary {
-  return o instanceof NodeList ? [].slice.call(o) : o;
+interface List<T> {
+  [index: number]: T;
+  length: number;
 }
 
-export function each(o: Array<any> | NodeList | Dictionary, fn: (v: any, k: number | string, o: Dictionary | Array<any>) => void): void {
-  o = nodeListToArray(o);
-  if (Array.isArray(o)) {
-    o.forEach(fn);
+interface Dictionary<T> {
+  [key: string]: T;
+}
+
+type ListIterator<T, U> = (value: T, index: number, collection: List<T>) => U;
+type DictionaryIterator<T, U> = (value: T, key: string, collection: Dictionary<T>) => U;
+
+export function mapDict<T, U>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, U>): Dictionary<U> {
+  let ret: Dictionary<U> = {};
+  for (let key in collection) {
+    if (collection.hasOwnProperty(key)) {
+      ret[key] = iteratee(collection[key], key, collection);
+    }
   }
-  else {
-    for (let k in o) {
-      if (o.hasOwnProperty(k)) {
-        fn(k, o[k], o);
-      }
+  return ret;
+}
+
+export function map<T, U>(collection: List<T>, iteratee: ListIterator<T, U>): U[] {
+  collection = collection instanceof NodeList ? [].slice.call(collection) : collection;
+  return (<Array<T>>collection).map(iteratee);
+}
+
+export function eachDict<T>(collection: Dictionary<T>, iteratee: DictionaryIterator<T, void>): void {
+  for (let key in collection) {
+    if (collection.hasOwnProperty(key)) {
+      iteratee(collection[key], key, collection);
     }
   }
 }
 
-export function map(o: Array<any> | NodeList | Dictionary, fn: (v: any, k: number | string, o: Dictionary | Array<any>) => any): any {
-  o = nodeListToArray(o);
-  if (Array.isArray(o)) {
-    return o.map(fn);
-  }
-  else {
-    let r: Dictionary = {};
-    for (let k in o) {
-      if (o.hasOwnProperty(k)) {
-        r[k] = fn(k, o[k], o);
-      }
-    }
-    return r;
-  }
+export function each<T>(collection: List<T>, iteratee: ListIterator<T, void>): void {
+  collection = collection instanceof NodeList ? [].slice.call(collection) : collection;
+  (<Array<T>>collection).forEach(iteratee);
 }
