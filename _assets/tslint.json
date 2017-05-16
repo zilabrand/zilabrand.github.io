@@ -15,6 +15,9 @@
 		"trailing-comma": [
 			true,
 			{ "multiline": "always", "singleline": "never" }
+		],
+		"one-line": [
+			false
 		]
 	}
 }
