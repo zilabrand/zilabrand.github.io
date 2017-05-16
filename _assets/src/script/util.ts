@@ -72,7 +72,7 @@ interface CreateElementOptions<Tag extends keyof HTMLElementTagNameMap> {
 
 export function createElement<Tag extends keyof HTMLElementTagNameMap>(
   tag: Tag,
-  { attrs, css, listeners }: CreateElementOptions<Tag>,
+  { attrs, css, listeners }: CreateElementOptions<Tag> = {},
   ...children: Node[],
 ): HTMLElementTagNameMap[Tag] {
   // Create the element

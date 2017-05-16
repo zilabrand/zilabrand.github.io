@@ -16,7 +16,7 @@ export function initSlideshow(el: HTMLElement, {
     startAt?: number,
     duration?: number,
     transitionCallback?: (to: number) => void
-  }
+  } = {}
 ): Slideshow {
   startAt = startAt || 0
   duration = duration || 1000
