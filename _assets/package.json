@@ -4,8 +4,8 @@
   "author": "Giaco Corsiglia <GiacoCorsiglia@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=dev webpack -d --progress",
-    "watch": "NODE_ENV=prod webpack -p --progress --watch",
+    "dev": "NODE_ENV=dev webpack -d --progress --devtool source-map",
+    "watch": "NODE_ENV=dev webpack -d --progress --watch --devtool source-map",
     "prod": "NODE_ENV=prod webpack -p --progress"
   },
   "devDependencies": {
