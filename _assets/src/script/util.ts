@@ -72,17 +72,17 @@ interface CreateElementOptions<Tag extends keyof HTMLElementTagNameMap> {
 
 export function createElement<Tag extends keyof HTMLElementTagNameMap>(
   tag: Tag,
-  { attrs, css, listeners }: CreateElementOptions<Tag> = { attrs: {}, css: {}, listeners: {} },
+  { attrs, css, listeners }: CreateElementOptions<Tag>,
   ...children: Node[],
 ): HTMLElementTagNameMap[Tag] {
   // Create the element
   let el = document.createElement(tag)
   // Attributes
-  assign(el, attrs)
+  assign(el, attrs || {})
   // CSS
-  each(css, (val, prop) => el.style.setProperty(prop, val))
+  each(css || {}, (val, prop) => el.style.setProperty(prop, val))
   // Event listeners
-  each(listeners, (listener, type) => el.addEventListener(type, listener))
+  each(listeners || {}, (listener, type) => el.addEventListener(type, listener))
   // Children
   each(children, child => el.appendChild(child))
   // All done

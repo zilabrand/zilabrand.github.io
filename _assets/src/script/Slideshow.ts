@@ -16,12 +16,12 @@ export function initSlideshow(el: HTMLElement, {
     startAt?: number,
     duration?: number,
     transitionCallback?: (to: number) => void
-  } = {
-    startAt: 0,
-    duration: 1000,
-    transitionCallback: to => undefined
   }
 ): Slideshow {
+  startAt = startAt || 0
+  duration = duration || 1000
+  transitionCallback = transitionCallback || (to => undefined)
+
   let slides = el.querySelectorAll('.slide')
 
   let current = startAt
