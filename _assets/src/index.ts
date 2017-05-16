@@ -1,3 +1,7 @@
-import './style/index.scss'
+/**
+ * Webpack entry file
+ */
 
-import './script/index'
+import 'style/index.scss';
+
+import 'script/index';

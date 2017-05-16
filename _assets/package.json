@@ -18,6 +18,8 @@
     "reset-css": "^2.2.0",
     "sass-loader": "^6.0.3",
     "style-loader": "^0.17",
+    "tslint": "^5.2.0",
+    "tslint-microsoft-contrib": "^5.0.0",
     "typescript": "^2.3",
     "webpack": "^2.5"
   }

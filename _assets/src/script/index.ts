@@ -1,6 +1,10 @@
-import { each } from './util'
+/**
+ * Entry point for actual application javascript
+ */
 
-import { createGallery } from './Gallery'
+import { each } from 'script/util';
 
-let portfolioGalleries = document.querySelectorAll('.portfolio-images')
-each(portfolioGalleries, createGallery)
+import { createGallery } from 'script/Gallery';
+
+const portfolioGalleries = document.querySelectorAll('.portfolio-images');
+each(portfolioGalleries, createGallery);

@@ -91,3 +91,4 @@ export function createElement<Tag extends keyof HTMLElementTagNameMap>(
 
 // Useful shorthands
 export const div = (opts?: CreateElementOptions<'div'>, ...children: Node[]) => createElement('div', opts, ...children);
+export const a = (opts?: CreateElementOptions<'a'>, ...children: Node[]) => createElement('a', opts, ...children);

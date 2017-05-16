@@ -5,6 +5,7 @@
     "noImplicitAny": true,
     "module": "es2015",
     "moduleResolution": "node",
+    "baseUrl": "./src",
     "target": "es5"
   },
   "include": [

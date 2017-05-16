@@ -1,0 +1,20 @@
+{
+	"extends": [
+		"tslint-microsoft-contrib"
+	],
+	"rulesDirectory": [
+		"node_modules/tslint-microsoft-contrib"
+	],
+	"rules": {
+		"typedef": [
+			false
+		],
+		"interface-name": [
+			"never-prefix"
+		],
+		"trailing-comma": [
+			true,
+			{ "multiline": "always", "singleline": "never" }
+		]
+	}
+}
