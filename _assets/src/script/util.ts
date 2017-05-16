@@ -12,7 +12,7 @@ function isList<T>(collection: List<T> | Dictionary<T>): collection is List<T> {
 }
 
 function listToArray<T>(list: List<T>): T[] {
-  return list instanceof NodeList ? [].slice.call(list) : list;
+  return Array.isArray(list) ? list : [].slice.call(list);
 }
 
 export function map<T, U>(collection: List<T>, iteratee: ListIteratee<T, U>): U[];
@@ -52,19 +52,42 @@ function assign(to: Dictionary<any>, ...froms: Dictionary<any>[]): Dictionary<an
   return to;
 }
 
+type Attrs<TagInterface> = {
+  [K in keyof TagInterface]?: TagInterface[K]
+}
+
+type PartialCSSStyleDeclaration = {
+  [K in keyof CSSStyleDeclaration]?: CSSStyleDeclaration[K]
+}
+
 type EventListenerDictionary = {
   [K in keyof DocumentEventMap]?: EventListenerOrEventListenerObject
 }
 
-export function createElement<K extends keyof HTMLElementTagNameMap>(
-  tag: K,
-  attrs?: Dictionary<string>,
-  listeners?: EventListenerDictionary,
+interface CreateElementOptions<Tag extends keyof HTMLElementTagNameMap> {
+  attrs?: Attrs<HTMLElementTagNameMap[Tag]>
+  css?: PartialCSSStyleDeclaration
+  listeners?: EventListenerDictionary
+}
+
+export function createElement<Tag extends keyof HTMLElementTagNameMap>(
+  tag: Tag,
+  { attrs, css, listeners }: CreateElementOptions<Tag> = { attrs: {}, css: {}, listeners: {} },
   ...children: Node[],
-): HTMLElementTagNameMap[K] {
+): HTMLElementTagNameMap[Tag] {
+  // Create the element
   let el = document.createElement(tag)
+  // Attributes
   assign(el, attrs)
-  each(listeners, (listener, type) => el.addEventListener(type, listener));
+  // CSS
+  each(css, (val, prop) => el.style.setProperty(prop, val))
+  // Event listeners
+  each(listeners, (listener, type) => el.addEventListener(type, listener))
+  // Children
   each(children, child => el.appendChild(child))
+  // All done
   return el;
 }
+
+// Useful shorthands
+export const div = (opts?: CreateElementOptions<'div'>, ...children: Node[]) => createElement('div', opts, ...children);

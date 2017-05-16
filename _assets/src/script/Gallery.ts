@@ -1,30 +1,34 @@
-import { map } from './util'
+import {
+  div,
+  map,
+} from './util'
 import { initSlideshow } from './Slideshow'
-
-const galContainer = document.createElement('div')
-galContainer.className = 'gal-container'
-
-const galContent = document.createElement('div')
-galContent.className = 'gal-content slideshow'
-
-galContainer.appendChild(galContent)
-
-const closeButton = document.createElement('div')
-closeButton.className = 'gal-close'
-
-galContainer.appendChild(closeButton)
 
 let close = function () {
   galContainer.remove()
   galContent.innerHTML = ''
 }
 
-closeButton.addEventListener('click', close)
-galContainer.addEventListener('click', (event) => {
-  if (event.target === galContainer) {
-    close()
-  }
+const galContent = div({ attrs: { className: 'gal-content slideshow' } })
+
+const closeButton = div({
+  attrs: { className: 'gal-close' },
+  listeners: { click: close },
 })
+
+const galContainer = div(
+  {
+    attrs: { className: 'gal-container' },
+    listeners: {
+      click: event => {
+        if (event.target === galContainer) close()
+      }
+    }
+  },
+  galContent,
+  closeButton,
+)
+
 
 interface GalItem {
   el: Element
@@ -34,7 +38,7 @@ interface GalItem {
 export function createGallery(el: HTMLElement): void {
   let show = function (index: number) {
     let slides = map(galItems, () => {
-      let slide = document.createElement('div')
+      let slide = div()
       slide.className = 'slide'
       galContent.appendChild(slide)
       return slide

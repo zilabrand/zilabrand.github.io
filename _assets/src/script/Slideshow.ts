@@ -1,5 +1,5 @@
 import {
-  createElement,
+  div,
   each,
 } from './util'
 
@@ -68,25 +68,20 @@ export function initSlideshow(el: HTMLElement, {
   }
 
   // Add controls!
-  el.appendChild(createElement(
-    'div',
-    { className: 'controls' },
-    {},
-    createElement(
-      'div',
-      { className: 'prev' },
-      { click: prev }
-    ),
-    createElement(
-      'div',
-      { className: 'pause-play' },
-      { click: () => (interval ? stop : start)() }
-    ),
-    createElement(
-      'div',
-      { className: 'next' },
-      { click: next }
-    )
+  el.appendChild(div(
+    { attrs: { className: 'controls' } },
+    div({
+      attrs: { className: 'prev' },
+      listeners: { click: prev },
+    }),
+    div({
+      attrs: { className: 'pause-play' },
+      listeners: { click: () => (interval ? stop : start)() },
+    }),
+    div({
+      attrs: { className: 'next' },
+      listeners: { click: next },
+    })
   ))
 
   each(slides, slide => slide.addEventListener('click', next))
