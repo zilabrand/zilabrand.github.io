@@ -2,11 +2,56 @@
  * Galleries!
  */
 
-import { initSlideshow } from 'script/Slideshow';
+import { Component } from 'script/Component';
+
+import { initSlideshow, Slideshow } from 'script/Slideshow';
 import {
   div,
   map,
 } from 'script/util';
+
+import { Theater } from 'script/Theater';
+
+interface GalItem {
+  el: Element;
+  src: string;
+}
+
+export class Gallery implements Component {
+  private static ITEM_CLASS = 'gal-item';
+
+  private items: GalItem[];
+  private startAt: number = 0;
+
+  constructor(el: HTMLElement) {
+    const itemEls = el.querySelectorAll(Gallery.ITEM_CLASS);
+    this.items = map(itemEls, (itemEl, index) => {
+      itemEl.addEventListener('click', () => this.show(index));
+
+      return {
+        el: itemEl,
+        src: itemEl.getAttribute('data-src'),
+      };
+    });
+  }
+
+  public render() {
+    // tslint:disable-next-line:no-unnecessary-callback-wrapper
+    const slides = map(this.items, () => div());
+    const slideshow = new Slideshow(slides);
+    slideshow.startAt = this.startAt;
+
+
+    return div();
+  }
+
+  private show(index: number) {
+    this.startAt = index;
+    const theater = new Theater(this);
+    theater.insert();
+  }
+}
+
 
 const close = () => {
   galContainer.remove();
@@ -36,10 +81,7 @@ const galContainer = div(
 );
 
 
-interface GalItem {
-  el: Element;
-  src: string;
-}
+
 
 // tslint:disable-next-line:export-name
 export function createGallery(el: HTMLElement): void {

@@ -2,9 +2,12 @@
  * Utilities
  */
 
-type List<T> = T[] | NodeList;
+export interface List<T> {
+  [index: number]: T;
+  length: number;
+}
 
-interface Dictionary<T> {
+export interface Dictionary<T> {
   [key: string]: T;
 }
 

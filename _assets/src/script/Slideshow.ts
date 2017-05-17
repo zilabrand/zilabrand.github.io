@@ -2,12 +2,102 @@
  * Slideshows!
  */
 
+import { Component } from 'script/Component';
+
 import {
   div,
   each,
+  List,
+  map,
 } from 'script/util';
 
-interface Slideshow {
+export class Slideshow implements Component {
+  public startAt: number = 0;
+  public duration: number = 3000;
+
+  private slides: HTMLElement[];
+  private container: HTMLDivElement;
+  private interval: number;
+  private current: number;
+
+  constructor(slideContents: List<HTMLElement>) {
+    this.slides = map(slideContents, content =>
+      div({ attrs: { className: 'slide' } }, content),
+    );
+  }
+
+  public transitionCallback: (to: number) => void = () => undefined;
+
+  readonly public render() {
+    if (!this.container) {
+      this.container = div(
+        { attrs: { className: 'slideshow' } },
+        ...this.slides,
+        this.renderControls(),
+      );
+    }
+
+    return this.container;
+  }
+
+  readonly public stop() {
+    if (!this.interval) {
+      return;
+    }
+    clearInterval(this.interval);
+    this.render().classList.remove('playing');
+    this.render().classList.add('paused');
+  }
+
+  readonly public start() {
+    if (this.interval) {
+      return;
+    }
+    this.interval = setInterval(() => this.next, this.duration);
+    this.render().classList.remove('paused');
+    this.render().classList.add('playing');
+  }
+
+  private transition(to: number) {
+    each(this.slides, (slide, i) => {
+      if (i !== to) {
+        slide.classList.remove('active');
+      }
+    });
+    this.slides[to].classList.add('active');
+    this.transitionCallback(to);
+    this.current = to;
+  }
+
+  private prev() {
+    this.transition((this.current - 1) % this.slides.length);
+  }
+
+  private next() {
+    this.transition((this.current + 1) % this.slides.length);
+  }
+
+  private renderControls() {
+    return div(
+      { attrs: { className: 'controls' } },
+      div({
+        attrs: { className: 'prev' },
+        listeners: { click: () => this.prev }
+      }),
+      div({
+        attrs: { className: 'pause-play' },
+        listeners: { click: () => (this.interval ? this.stop : this.start)() }
+      }),
+      div({
+        attrs: { className: 'next' },
+        listeners: { click: () => this.next }
+      }),
+    ));
+  }
+
+}
+
+interface SlideshowI {
   start(): void;
   stop(): void;
 }
@@ -23,7 +113,7 @@ export function initSlideshow(el: HTMLElement, {
     duration?: number,
     transitionCallback?(to: number): void
   } = {}
-): Slideshow {
+): SlideshowI {
   startAt = startAt || 0;
   duration = duration || 1000;
   transitionCallback = transitionCallback || (to => undefined);
