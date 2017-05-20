@@ -4,45 +4,62 @@
 
 import { Component } from 'script/Component';
 
-import { initSlideshow, Slideshow } from 'script/Slideshow';
+import {
+  Slide,
+  Slideshow,
+} from 'script/Slideshow';
+
 import {
   div,
+  List,
   map,
 } from 'script/util';
 
 import { Theater } from 'script/Theater';
 
-interface GalItem {
-  el: Element;
-  src: string;
+class GallerySlide implements Slide {
+  private src: string;
+  private root: HTMLDivElement;
+  private hasActivated: Boolean;
+
+  constructor(src: string) {
+    this.src = src;
+    this.root = div();
+  }
+
+  public render(): HTMLDivElement {
+    return this.root;
+  }
+
+  public activate(): void {
+    if (this.hasActivated) {
+      return;
+    }
+    this.hasActivated = true;
+
+    const image = new Image();
+    image.src = this.src;
+    this.root.appendChild(image);
+  }
 }
 
 export class Gallery implements Component {
-  private static ITEM_CLASS = 'gal-item';
-
-  private items: GalItem[];
+  private slides: GallerySlide[];
   private startAt: number = 0;
 
-  constructor(el: HTMLElement) {
-    const itemEls = el.querySelectorAll(Gallery.ITEM_CLASS);
-    this.items = map(itemEls, (itemEl, index) => {
+  constructor(itemEls: List<Element>) {
+    this.slides = map(itemEls, (itemEl, index) => {
       itemEl.addEventListener('click', () => this.show(index));
 
-      return {
-        el: itemEl,
-        src: itemEl.getAttribute('data-src'),
-      };
+      return new GallerySlide(itemEl.getAttribute('data-src'));
     });
   }
 
   public render() {
-    // tslint:disable-next-line:no-unnecessary-callback-wrapper
-    const slides = map(this.items, () => div());
-    const slideshow = new Slideshow(slides);
+    const slideshow = new Slideshow(this.slides);
     slideshow.startAt = this.startAt;
 
-
-    return div();
+    return slideshow.render();
   }
 
   private show(index: number) {
@@ -50,73 +67,4 @@ export class Gallery implements Component {
     const theater = new Theater(this);
     theater.insert();
   }
-}
-
-
-const close = () => {
-  galContainer.remove();
-  galContent.innerHTML = '';
-};
-
-const galContent = div({ attrs: { className: 'gal-content slideshow' } });
-
-const closeButton = div({
-  attrs: { className: 'gal-close' },
-  listeners: { click: close },
-});
-
-const galContainer = div(
-  {
-    attrs: { className: 'gal-container' },
-    listeners: {
-      click: event => {
-        if (event.target === galContainer) {
-          close();
-        }
-      },
-    },
-  },
-  galContent,
-  closeButton,
-);
-
-
-
-
-// tslint:disable-next-line:export-name
-export function createGallery(el: HTMLElement): void {
-  const show = (index: number) => {
-    const slides = map(galItems, () => {
-      const slide = div();
-      slide.className = 'slide';
-      galContent.appendChild(slide);
-
-      return slide;
-    });
-
-    initSlideshow(galContent, {
-      startAt: index,
-      duration: 2500,
-      transitionCallback(to) {
-        const slide = slides[to];
-        if (!slide.getElementsByTagName('img').length) {
-          const img = new Image();
-          img.src = galItems[to].src;
-          slide.appendChild(img);
-        }
-      },
-    });
-
-    document.documentElement.appendChild(galContainer);
-  };
-
-  const galItems = map(el.querySelectorAll('.gal-item'), (itemEl, index): GalItem => {
-    itemEl.addEventListener('click', () => show(index));
-
-    return {
-      el: itemEl,
-      src: itemEl.getAttribute('data-src'),
-    };
-  });
-
 }

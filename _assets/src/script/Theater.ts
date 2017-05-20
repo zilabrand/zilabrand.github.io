@@ -13,7 +13,7 @@ import {
 } from 'script/util';
 
 export class Theater extends InsertableIntoBody implements Component {
-  private container: HTMLDivElement;
+  private root: HTMLDivElement;
   private contentComponent: Component;
 
   constructor(contentComponent: Component) {
@@ -22,12 +22,12 @@ export class Theater extends InsertableIntoBody implements Component {
   }
 
   public render() {
-    this.container = div(
+    this.root = div(
       {
         attrs: { className: 'theater-container' },
         listeners: {
           click: event => {
-            if (event.target === this.container) {
+            if (event.target === this.root) {
               close();
             }
           },
@@ -43,14 +43,10 @@ export class Theater extends InsertableIntoBody implements Component {
       }),
     );
 
-    return this.container;
-  }
-
-  public insert() {
-    document.body.appendChild(this.render());
+    return this.root;
   }
 
   private destroy() {
-    this.container.remove();
+    this.root.remove();
   }
 }

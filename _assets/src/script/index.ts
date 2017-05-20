@@ -4,7 +4,6 @@
 
 import { each } from 'script/util';
 
-import { createGallery } from 'script/Gallery';
+import { Gallery } from 'script/Gallery';
 
-const portfolioGalleries = document.querySelectorAll('.portfolio-images');
-each(portfolioGalleries, createGallery);
+each(document.querySelectorAll('.portfolio-images'), g => new Gallery(g.querySelectorAll('.gal-item')));
