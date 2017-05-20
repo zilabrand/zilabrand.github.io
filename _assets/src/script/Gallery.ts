@@ -24,7 +24,7 @@ class GallerySlide implements Slide {
 
   constructor(src: string) {
     this.src = src;
-    this.root = div();
+    this.root = div({ attrs: { className: 'gallery-slide' } });
   }
 
   public render(): HTMLDivElement {

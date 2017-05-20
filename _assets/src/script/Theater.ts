@@ -28,7 +28,7 @@ export class Theater extends InsertableIntoBody implements Component {
         listeners: {
           click: event => {
             if (event.target === this.root) {
-              close();
+              this.destroy();
             }
           },
         },
@@ -39,7 +39,7 @@ export class Theater extends InsertableIntoBody implements Component {
       ),
       a({
         attrs: { className: 'theater-close' },
-        listeners: { click: () => this.destroy },
+        listeners: { click: () => this.destroy() },
       }),
     );
 

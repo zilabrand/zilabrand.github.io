@@ -42,6 +42,7 @@ export class Slideshow implements Component {
   }
 
   public render() {
+    this.transition(this.startAt);
     return this.root;
   }
 
@@ -87,7 +88,7 @@ export class Slideshow implements Component {
       { attrs: { className: 'controls' } },
       div({
         attrs: { className: 'prev' },
-        listeners: { click: () => this.prev },
+        listeners: { click: () => this.prev() },
       }),
       div({
         attrs: { className: 'pause-play' },
@@ -95,7 +96,7 @@ export class Slideshow implements Component {
       }),
       div({
         attrs: { className: 'next' },
-        listeners: { click: () => this.next },
+        listeners: { click: () => this.next() },
       }),
     );
   }
