@@ -62,17 +62,17 @@
   .archive-cols {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 12px;
-    margin-left: -6px;
-    margin-right: -6px;
+    margin-top: $spacing * 2;
+    margin-left: -$spacing;
+    margin-right: -$spacing;
 
     .archive-link {
       flex: 1;
-      min-width: 30%;
+      min-width: 30%; // No more than 3 per row; they grow to the right size
 
-      margin-left: 6px;
-      margin-right: 6px;
-      margin-bottom: 12px;
+      margin-left: $spacing;
+      margin-right: $spacing;
+      margin-bottom: $spacing * 2;
     }
   }
 }
