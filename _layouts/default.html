@@ -31,8 +31,10 @@
             {% assign parts_size = parts | size %}
             {% comment %}Top level pages only{% endcomment %}
             {% if parts_size == 2 %}
-              <li{% if page.url contains nav_page.url %} class="active"{% endif %}>
-                <a href="{{ nav_page.url }}">{{ nav_page.title }}</a><br />
+              <li>
+                <a href="{{ nav_page.url }}"
+                  {% if page.url contains nav_page.url %}class="active"{% endif %}
+                >{{ nav_page.title }}</a>
               </li>
             {% endif %}
           {% endfor %}
