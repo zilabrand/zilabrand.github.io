@@ -24,3 +24,15 @@ $mobile: 679px;
     @content;
   }
 }
+
+@mixin fade-in-hover($from, $to: 1, $in: 100ms, $out: 150ms) {
+  opacity: $from;
+  transition-property: opacity;
+  transition-timing-function: ease;
+  transition-duration: $out;
+
+  &:hover {
+    opacity: $to;
+    transition-duration: $in;
+  }
+}
