@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{ page.title | default:"ZilaBrand.com" }}</title>
+    <title>
+      Zila Brand
+      {% if page.title and page.url != "/" %}
+        - {{ page.title }}
+      {% endif %}
+    </title>
 
     <link rel="stylesheet" href="/_style.css">
 
