@@ -27,8 +27,11 @@
       <nav>
         <ul>
           {% for nav_page in site.pages %}
-            {% if nav_page.url != '/' %}
-              <li class="{% if page.url == nav_page.url %}active{% endif %}">
+            {% assign parts = nav_page.url | split:"/" %}
+            {% assign parts_size = parts | size %}
+            {% comment %}Top level pages only{% endcomment %}
+            {% if parts_size == 2 %}
+              <li class="{% if page.url contains nav_page.url %}active{% endif %}">
                 <a href="{{ nav_page.url }}">{{ nav_page.title }}</a><br />
               </li>
             {% endif %}
