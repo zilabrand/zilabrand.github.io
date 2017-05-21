@@ -17,12 +17,14 @@ import {
 
 import { Theater } from 'script/Theater';
 
-class GallerySlide implements Slide {
+class GallerySlide extends Slide {
   private src: string;
   private root: HTMLDivElement;
-  private hasActivated: Boolean;
+  private image: HTMLImageElement;
 
   constructor(src: string) {
+    super();
+
     this.src = src;
     this.root = div({ attrs: { className: 'gallery-slide' } });
   }
@@ -31,19 +33,18 @@ class GallerySlide implements Slide {
     return this.root;
   }
 
-  public forSlideshow(slideshow: Slideshow) {
-    this.root.addEventListener('click', () => slideshow.next());
+  public forSlideshow(slideshow: Slideshow): void {
+    this.registerEvent(this.root, 'click', () => slideshow.next());
   }
 
   public activate(): void {
-    if (this.hasActivated) {
+    if (this.image) {
       return;
     }
-    this.hasActivated = true;
 
-    const image = new Image();
-    image.src = this.src;
-    this.root.appendChild(image);
+    this.image = new Image();
+    this.image.src = this.src;
+    this.root.appendChild(this.image);
   }
 }
 

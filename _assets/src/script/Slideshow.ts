@@ -16,12 +16,12 @@ import {
   map,
 } from 'script/util';
 
-export interface Slide extends Component {
-  activate(): void;
-  forSlideshow(slideshow: Slideshow): void;
+export abstract class Slide extends Component {
+  public abstract activate(): void;
+  public abstract forSlideshow(slideshow: Slideshow): void;
 }
 
-export class Slideshow implements Component, TheaterReady {
+export class Slideshow extends Component implements TheaterReady {
   public startAt: number = 0;
   public duration: number = 3000;
 
@@ -32,7 +32,11 @@ export class Slideshow implements Component, TheaterReady {
   private interval: number;
   private current: number;
 
+  private keyUpHandler: EventListener;
+
   constructor(slides: List<Slide>) {
+    super();
+
     this.slides = slides;
     each(this.slides, slide => slide.forSlideshow(this));
     this.slideElements = map(this.slides, slide => slide.render());
@@ -71,6 +75,17 @@ export class Slideshow implements Component, TheaterReady {
   public forTheater(theater: Theater): void {
     theater.registerDestroyer(this.root);
     each(this.slideElements, el => theater.registerDestroyer(el));
+    // If it's the theater it's the only one and we can register key events
+    this.registerEvent(window, 'keyup', (event: KeyboardEvent) => {
+      if (event.keyCode === 37) {
+        // Left arrow
+        this.prev();
+      }
+      else if (event.keyCode === 39) {
+        // Right arrow
+        this.next();
+      }
+    });
   }
 
   public prev() {

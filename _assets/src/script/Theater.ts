@@ -10,22 +10,24 @@ import {
 import {
   a,
   div,
+  each,
 } from 'script/util';
 
 export interface TheaterReady {
   forTheater(theater: Theater): void;
 }
 
-export function isTheaterReady(component: { forTheater?(): void }): component is TheaterReady {
+function isTheaterReady(component: Partial<TheaterReady>): component is TheaterReady {
   return !!component.forTheater;
 }
 
-export class Theater extends InsertableIntoBody implements Component {
+export class Theater extends InsertableIntoBody {
   private root: HTMLDivElement;
   private contentComponent: Component;
 
   constructor(contentComponent: Component) {
     super();
+
     this.contentComponent = contentComponent;
     if (isTheaterReady(this.contentComponent)) {
       this.contentComponent.forTheater(this);
@@ -33,7 +35,7 @@ export class Theater extends InsertableIntoBody implements Component {
   }
 
   public registerDestroyer(target: EventTarget): void {
-    target.addEventListener('click', event => {
+    this.registerEvent(target, 'click', event => {
       if (event.target === target) {
         this.destroy();
       }
@@ -58,10 +60,19 @@ export class Theater extends InsertableIntoBody implements Component {
     this.registerDestroyer(content);
     this.registerDestroyer(this.root);
 
+    this.registerEvent(window, 'keyup', (event: KeyboardEvent) => {
+      if (event.keyCode === 27) {
+        // Escape key
+        this.destroy();
+      }
+    });
+
     return this.root;
   }
 
-  private destroy() {
+  public destroy() {
+    super.destroy();
     this.root.remove();
+    this.contentComponent.destroy();
   }
 }
