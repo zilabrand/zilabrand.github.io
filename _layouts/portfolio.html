@@ -14,14 +14,11 @@ layout: default
     </div>
   {% endunless %}
 
-  {% assign cloudinary = "https://res.cloudinary.com/zilabrand/image/upload" %}
-  {% assign thumbnail = "dpr_auto,f_auto,q_auto,c_fill,g_auto,h_231,w_231" %}
-  {% comment %}Max out at 1500 width but otherwise scale to 100vw{% endcomment %}
   {% assign full = "dpr_auto,f_auto,q_auto,c_scale,w_auto/c_limit,w_1500" %}
   {% for image in page.images %}
     <div class="portfolio-image gal-item"
-      style="background-image: url({{ cloudinary }}/{{ thumbnail }}/{{ image.src }})"
-      data-src="{{ cloudinary }}/{{ full }}/{{ image.src }}"
+      style="background-image: url({{ site.data.sizes.thumbnail }}/{{ image.src }})"
+      data-src="{{ site.data.sizes.full }}/{{ image.src }}"
       data-sizes="100vw"
     ></div>
   {% endfor %}

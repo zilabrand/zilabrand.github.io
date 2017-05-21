@@ -6,13 +6,13 @@ layout: default
   {{ content }}
 </div>
 
-<a class="home-gal-link home-gal-main" href="{{ page.main_link.link }}" style="background-image: url({{ page.main_link.image }})">
+<a class="home-gal-link home-gal-main" href="{{ page.main_link.link }}" style="background-image: url({{ site.data.sizes.home-large }}/{{ page.main_link.image }})">
   <span>{{ page.main_link.label }}</span>
 </a>
 
 <div class="home-gal-cols">
   {% for l in page.secondary_links %}
-    <a class="home-gal-link" href="{{ l.link }}" style="background-image: url({{ l.image }})">
+    <a class="home-gal-link" href="{{ l.link }}" style="background-image: url({{ site.data.sizes.home-small }}/{{ l.image }})">
       <span>{{ l.label }}</span>
     </a>
   {% endfor %}
