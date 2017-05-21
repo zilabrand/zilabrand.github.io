@@ -31,6 +31,10 @@ class GallerySlide implements Slide {
     return this.root;
   }
 
+  public forSlideshow(slideshow: Slideshow) {
+    this.root.addEventListener('click', () => slideshow.next());
+  }
+
   public activate(): void {
     if (this.hasActivated) {
       return;
@@ -43,7 +47,7 @@ class GallerySlide implements Slide {
   }
 }
 
-export class Gallery implements Component {
+export class Gallery {
   private slides: GallerySlide[];
   private startAt: number = 0;
 
@@ -55,16 +59,11 @@ export class Gallery implements Component {
     });
   }
 
-  public render() {
-    const slideshow = new Slideshow(this.slides);
-    slideshow.startAt = this.startAt;
-
-    return slideshow.render();
-  }
-
   private show(index: number) {
-    this.startAt = index;
-    const theater = new Theater(this);
+    const slideshow = new Slideshow(this.slides);
+    slideshow.startAt = index;
+
+    const theater = new Theater(slideshow);
     theater.insert();
   }
 }

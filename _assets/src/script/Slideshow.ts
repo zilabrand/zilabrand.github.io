@@ -5,6 +5,11 @@
 import { Component } from 'script/Component';
 
 import {
+  Theater,
+  TheaterReady,
+} from 'script/Theater';
+
+import {
   div,
   each,
   List,
@@ -13,29 +18,27 @@ import {
 
 export interface Slide extends Component {
   activate(): void;
+  forSlideshow(slideshow: Slideshow): void;
 }
 
-export class Slideshow implements Component {
+export class Slideshow implements Component, TheaterReady {
   public startAt: number = 0;
   public duration: number = 3000;
 
   private root: HTMLDivElement;
   private slides: List<Slide>;
-  private slideElements: HTMLDivElement[];
+  private slideElements: HTMLElement[];
 
   private interval: number;
   private current: number;
 
   constructor(slides: List<Slide>) {
     this.slides = slides;
-
-    this.slideElements = map(this.slides, slide => div(
-      { attrs: { className: 'slide' } },
-      slide.render(),
-    ));
+    each(this.slides, slide => slide.forSlideshow(this));
+    this.slideElements = map(this.slides, slide => slide.render());
 
     this.root = div(
-      { attrs: { className: 'slideshow' } },
+      { attrs: { className: 'slideshow paused' } },
       ...this.slideElements,
       this.renderControls(),
     );
@@ -43,6 +46,7 @@ export class Slideshow implements Component {
 
   public render() {
     this.transition(this.startAt);
+
     return this.root;
   }
 
@@ -59,9 +63,22 @@ export class Slideshow implements Component {
     if (this.interval) {
       return;
     }
-    this.interval = setInterval(() => this.next, this.duration);
+    this.interval = setInterval(() => this.next(), this.duration);
     this.root.classList.remove('paused');
     this.root.classList.add('playing');
+  }
+
+  public forTheater(theater: Theater): void {
+    theater.registerDestroyer(this.root);
+    each(this.slideElements, el => theater.registerDestroyer(el));
+  }
+
+  public prev() {
+    this.transition((this.current - 1) % this.slides.length);
+  }
+
+  public next() {
+    this.transition((this.current + 1) % this.slides.length);
   }
 
   private transition(to: number) {
@@ -75,14 +92,6 @@ export class Slideshow implements Component {
     this.current = to;
   }
 
-  private prev() {
-    this.transition((this.current - 1) % this.slides.length);
-  }
-
-  private next() {
-    this.transition((this.current + 1) % this.slides.length);
-  }
-
   private renderControls() {
     return div(
       { attrs: { className: 'controls' } },
@@ -92,7 +101,7 @@ export class Slideshow implements Component {
       }),
       div({
         attrs: { className: 'pause-play' },
-        listeners: { click: () => (this.interval ? this.stop : this.start)() },
+        listeners: { click: () => this.interval ? this.stop() : this.start() },
       }),
       div({
         attrs: { className: 'next' },
