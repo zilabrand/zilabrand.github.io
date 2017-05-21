@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Detail Work
+featured_image: fabric-manipulation/DSC07334_fnzaws.jpg
 images:
   - src: detail-work/SCN_0005_copy_jdbkfh.jpg
   - src: detail-work/SCN_0004_copy_ak6iz1.jpg

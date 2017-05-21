@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Fashion
+featured_image: bags/DSC07266_rdiaah.jpg
 images:
   - src: bags/DSC07325_liwxps.jpg
   - src: bags/DSC07329_wuziby.jpg

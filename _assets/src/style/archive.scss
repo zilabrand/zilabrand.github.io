@@ -1,9 +1,9 @@
-.home-content {
+.archive-content {
   margin: 0 auto 48px;
   max-width: 500px;
 }
 
-.home-gal-link {
+.archive-link {
   display: flex;
   flex-direction: column;
   height: 216px;
@@ -51,7 +51,7 @@
   }
 
   @include desktop {
-    &.home-gal-main {
+    &.archive-main {
       height: 288px;
       font-size: 28px;
     }
@@ -59,19 +59,20 @@
 }
 
 @include desktop {
-  .home-gal-cols {
+  .archive-cols {
     display: flex;
+    flex-wrap: wrap;
     margin-top: 12px;
+    margin-left: -6px;
+    margin-right: -6px;
 
-    .home-gal-link {
+    .archive-link {
       flex: 1;
+      min-width: 30%;
 
       margin-left: 6px;
       margin-right: 6px;
-
-      &:first-child { margin-left: 0; }
-
-      &:last-child { margin-right: 0; }
+      margin-bottom: 12px;
     }
   }
 }

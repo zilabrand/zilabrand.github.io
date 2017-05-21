@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: More Home Decor
+featured_image: home-decor-more/SCN_0014_copy_kw0cba.jpg
 images:
   - src: home-decor-more/SCN_0014_copy_kw0cba.jpg
   - src: home-decor-more/SCN_0038_copy_3_sxsufr.jpg

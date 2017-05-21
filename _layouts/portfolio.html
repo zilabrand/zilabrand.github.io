@@ -14,7 +14,6 @@ layout: default
     </div>
   {% endunless %}
 
-  {% assign full = "dpr_auto,f_auto,q_auto,c_scale,w_auto/c_limit,w_1500" %}
   {% for image in page.images %}
     <div class="portfolio-image gal-item"
       style="background-image: url({{ site.data.sizes.thumbnail }}/{{ image.src }})"

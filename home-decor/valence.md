@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Valences
+featured_image: valence/SCN_0019_copy_2_a5xe81.jpg
 images:
   - src: valence/SCN_0019_copy_2_a5xe81.jpg
   - src: valence/SCN_0020_copy_2_y1eocw.jpg
