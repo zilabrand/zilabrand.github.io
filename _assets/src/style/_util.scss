@@ -25,6 +25,10 @@ $mobile: 679px;
   }
 }
 
+@mixin google-font {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
 @mixin fade-in-hover($from, $to: 1, $in: 100ms, $out: 150ms) {
   opacity: $from;
   transition-property: opacity;

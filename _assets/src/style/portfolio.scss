@@ -3,8 +3,8 @@ $spacing: 6px;
 .portfolio-heading {
   margin-bottom: $spacing * 2;
   font-size: 36px;
-  font-family: 'HelveticaNeue-CondensedBlack';
-  font-weight: bold;
+  @include google-font;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: .5px;
 }
