@@ -20,13 +20,21 @@ import { Theater } from 'script/Theater';
 class GallerySlide extends Slide {
   private src: string;
   private root: HTMLDivElement;
+  private loader: HTMLDivElement;
   private image: HTMLImageElement;
 
   constructor(src: string) {
     super();
 
     this.src = src;
-    this.root = div({ attrs: { className: 'gallery-slide' } });
+    this.loader = div(
+      { attrs: { className: 'gallery-loader' } },
+      div(), div(), div(), div(),
+    );
+    this.root = div(
+      { attrs: { className: 'gallery-slide' } },
+      this.loader,
+    );
   }
 
   public render(): HTMLDivElement {
@@ -43,6 +51,7 @@ class GallerySlide extends Slide {
     }
 
     this.image = new Image();
+    this.registerEvent(this.image, 'load', () => this.loader.remove());
     this.image.src = this.src;
     this.root.appendChild(this.image);
   }

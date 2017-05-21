@@ -1,11 +1,58 @@
 .gal-item { cursor: pointer; }
 
 .gallery-slide {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+
+  .gallery-loader {
+    z-index: 2;
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
+
+    $size: 22px;
+    $space: 3px;
+    $from-opacity: .4;
+    $to-opacity: .8;
+    $duration: 2s;
+
+    width: ($size + $space * 2) * 2;
+    height: ($size + $space * 2) * 2;
+
+    div {
+      float: left;
+      width: $size;
+      height: $size;
+      margin: $space;
+      background: #fff;
+
+      animation-name: gallery-loader-animation;
+      animation-iteration-count: infinite;
+      animation-duration: $duration;
+      animation-timing-function: cubic-bezier(0.645, 0.045, 0.355, 1.000);
+      animation-fill-mode: both;
+
+      backface-visibility: hidden;
+
+      // top right
+      &:nth-child(2) { animation-delay: $duration / 4; }
+      // bottom right
+      &:nth-child(4) { animation-delay: ($duration / 4) * 2; }
+      // bottom left
+      &:nth-child(3) { animation-delay: ($duration / 4) * 3; }
+
+      @at-root {
+        @keyframes gallery-loader-animation {
+          0% { opacity: $from-opacity; }
+          50% { opacity: $to-opacity; }
+          100% { opacity: $from-opacity; }
+        }
+      }
+    }
+  }
 
   img {
+    position: absolute;
+    top: 0; right: 0; bottom: 0; left: 0;
+    margin: auto;
     width: auto;
     height: auto;
     max-width: 100%;
