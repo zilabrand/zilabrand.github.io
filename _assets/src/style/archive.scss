@@ -15,7 +15,7 @@
   -webkit-font-smoothing: anitialiased;
   font-size: 24px;
   letter-spacing: .25px;
-  text-shadow: 0 1px 2px rgba(#000, .5), 0 0 15px rgba(#000, .5);
+  text-shadow: 0 1px 2px rgba(#000, .5), 0 0 15px rgba(#000, .8);
 
   background-size: cover;
   background-position: center center;
@@ -30,12 +30,11 @@
     content: '';
     position: absolute;
     top: 0; right: 0; bottom: 0; left: 0;
-    background: rgba(#000, .2);
-    transition: background 150ms ease-in-out;
+    transition: background 100ms ease-in-out;
   }
 
   &:hover::before {
-    background: rgba(#000, .2);
+    background: rgba(#000, .15);
     transition-duration: 75ms;
   }
 
@@ -45,9 +44,8 @@
     margin-top: auto;
     position: relative;
     z-index: 2;
-    padding: 11px 3px 7px;
+    padding: 12px 3px 6px;
     background: rgba(#000, .3);
-    box-shadow: 0 0 10px 1px rgba(#000, .25);
   }
 
   @include desktop {
