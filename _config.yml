@@ -5,3 +5,6 @@ exclude:
   - GemFile
   - Gemfile.lock
   - README.md
+include:
+  - _script.js
+  - _style.css
