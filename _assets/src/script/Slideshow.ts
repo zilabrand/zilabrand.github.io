@@ -89,7 +89,7 @@ export class Slideshow extends Component implements TheaterReady {
   }
 
   public prev() {
-    this.transition((this.current - 1) % this.slides.length);
+    this.transition(((this.current - 1) + this.slides.length) % this.slides.length);
   }
 
   public next() {
