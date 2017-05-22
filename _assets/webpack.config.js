@@ -1,7 +1,7 @@
 /* eslint-env node */
 
-const path = require('path')
-const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   context: path.join(__dirname, 'src'),
@@ -16,7 +16,7 @@ module.exports = {
     extensions: ['.ts', '.js', 'scss'],
   },
   output: {
-    path: path.resolve(__dirname, '../_site/'),
+    path: path.resolve(__dirname, '../'),
     filename: '_script.js',
   },
   devtool: 'source-map',
@@ -40,4 +40,4 @@ module.exports = {
   plugins: [
     new ExtractTextPlugin('_style.css'),
   ],
-}
+};
