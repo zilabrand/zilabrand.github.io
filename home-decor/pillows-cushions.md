@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Pillows & Cushions
+order: 5
 featured_image: pillows-cushions/SCN_0045_copy_xvsphs.jpg
 images:
   - src: pillows-cushions/SCN_0045_copy_xvsphs.jpg

@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Bedding
+order: 4
 featured_image: bedding/SCN_0046_e5it0c.jpg
 images:
   - src: bedding/SCN_0046_e5it0c.jpg

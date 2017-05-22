@@ -1,6 +1,7 @@
 ---
 layout: portfolio
 title: Shades
+order: 1
 featured_image: shades/SCN_0049_copy_liiw4n.jpg
 images:
   - src: shades/SCN_0049_copy_liiw4n.jpg
