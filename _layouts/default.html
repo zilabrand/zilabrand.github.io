@@ -1,13 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{{ page.title | default:"ZilaBrand.com" }}</title>
+    <title>
+      Zila Brand
+      {% if page.title and page.url != "/" %}
+        - {{ page.title }}
+      {% endif %}
+    </title>
+
+    <meta http-equiv="Accept-CH" content="DPR, Viewport-Width, Width">
+
+    <script type="text/javascript">
+      (function(){
+        var link = document.createElement('link');
+        link.type = 'text/css';
+        link.rel = 'stylesheet';
+        link.href = 'https://fonts.googleapis.com/css?family=Josefin+Sans:400,700';
+        document.head.appendChild(link);
+      })();
+    </script>
 
     <link rel="stylesheet" href="/_style.css">
   </head>
 
   <body>
-    {{ content }}
+    <header class="header container">
+      <h2>
+        <a href="/">Zila Brand</a>
+      </h2>
+
+      <nav>
+        <ul>
+          {% for nav_page in site.pages %}
+            {% assign parts = nav_page.url | split:"/" %}
+            {% assign parts_size = parts | size %}
+            {% comment %}Top level pages only{% endcomment %}
+            {% if parts_size == 2 %}
+              <li>
+                <a href="{{ nav_page.url }}"
+                  {% if page.url contains nav_page.url %}class="active"{% endif %}
+                >{{ nav_page.title }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container">
+      {{ content }}
+    </main>
+
+    <footer class="footer container">
+      &copy; Zila Brand {{ "now" | date: "%Y" }}
+    </footer>
 
     <script type="text/javascript" src="/_script.js"></script>
   </body>

@@ -2,14 +2,23 @@
 layout: default
 ---
 
-<main class="portfolio">
-  <section class="portfolio-content">
-    {{ content }}
-  </section>
+<h1 class="page-heading">{{ page.title }}</h1>
 
-  <section class="portfolio-images">
-    {% for image in page.images %}
-      <div class="portfolio-image" style="background-image: url({{ image.src }})"></div>
-    {% endfor %}
-  </section>
-</main>
+<section class="portfolio-images">
+  {% assign trimmed_content = content|strip %}
+  {% unless trimmed_content == "" %}
+    <div class="portfolio-content">
+      <div>
+        {{ content }}
+      </div>
+    </div>
+  {% endunless %}
+
+  {% for image in page.images %}
+    <div class="portfolio-image gal-item"
+      style="background-image: url({{ site.data.sizes.thumbnail }}/{{ image.src }})"
+      data-src="{{ site.data.sizes.full }}/{{ image.src }}"
+      data-sizes="100vw"
+    ></div>
+  {% endfor %}
+</section>

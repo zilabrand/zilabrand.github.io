@@ -1,12 +1,6 @@
 ---
-layout: portfolio
-images:
-  - src: http://www.francespusch.com/img/portfolio/007_thumb.jpg
-  - src: http://www.francespusch.com/img/portfolio/007_thumb.jpg
-  - src: http://www.francespusch.com/img/portfolio/007_thumb.jpg
-  - src: http://www.francespusch.com/img/portfolio/007_thumb.jpg
+layout: archive
+title: Home Decor
+featured_image: bedding/DSC07228_d1okos.jpg
+is_main_feature: true
 ---
-
-[Go home](/)
-
-Cras placerat mauris a iaculis euismod. Phasellus varius auctor vestibulum. Integer porttitor, felis sed molestie dapibus, sapien lorem ultricies lacus, nec eleifend nunc ante vitae neque. Nam turpis nisi, mollis a diam vitae, viverra porttitor ex. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque tincidunt porta arcu, vel maximus libero porttitor laoreet. Donec pulvinar lobortis nisl, non facilisis magna condimentum eu. Sed sollicitudin tincidunt vehicula.

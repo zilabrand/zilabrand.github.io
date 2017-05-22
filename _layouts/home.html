@@ -2,26 +2,18 @@
 layout: default
 ---
 
-<main class="home">
-  <div class="home-content">
-    {{ content }}
-  </div>
+<div class="home-content">
+  {{ content }}
+</div>
 
-  <a class="home-gal-link home-gal-main home-decor" href="/home-decor/" style="background-image: url({{ page.images.home_decor }})">
-    <span>Home Decor</span>
-  </a>
+<a class="home-gal-link home-gal-main" href="{{ page.main_link.link }}" style="background-image: url({{ site.data.sizes.home-large }}/{{ page.main_link.image }})">
+  <span>{{ page.main_link.label }}</span>
+</a>
 
-  <div class="home-gal-thirds">
-    <a class="home-gal-link fashion" href="/fashion/" style="background-image: url({{ page.images.fashion }})">
-      <span>Fashion</span>
+<div class="home-gal-cols">
+  {% for l in page.secondary_links %}
+    <a class="home-gal-link" href="{{ l.link }}" style="background-image: url({{ site.data.sizes.home-small }}/{{ l.image }})">
+      <span>{{ l.label }}</span>
     </a>
-
-    <a class="home-gal-link detail-work" href="/detail-work/" style="background-image: url({{ page.images.detail_work }})">
-      <span>Detail Work</span>
-    </a>
-
-    <a class="home-gal-link metal-work" href="/metal-work/" style="background-image: url({{ page.images.metal_work }})">
-      <span>Metal Work</span>
-    </a>
-  </div>
-</main>
+  {% endfor %}
+</div>

@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "outDir": "../_site/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "es2015",
+    "moduleResolution": "node",
+    "baseUrl": "./src",
+    "target": "es5"
+  },
+  "include": [
+    "./src/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}

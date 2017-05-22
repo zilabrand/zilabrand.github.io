@@ -2,12 +2,92 @@ body {
   background: #21252b;
   color: #f2f2f2;
   font-family: sans-serif;
-  font-size: 15px;
+  font-size: 16px;
   line-height: 1.2;
-  letter-spacing: .25px;
+
+  @at-root {
+    @keyframes body-fade-in {
+      0% { opacity: 0; }
+      100% { opacity: 1; }
+    }
+  }
+
+  animation-name: body-fade-in;
+  animation-duration: 500ms;
+  animation-timing-function: ease-in-out;
+  animation-fill-mode: both;
+  animation-play-state: running;
+  animation-iteration-count: 1;
+}
+
+.container {
+  max-width: 960px;
+  margin: ($spacing * 6) auto;
+  padding-left: $spacing * 2;
+  padding-right: $spacing * 2;
 }
 
 a {
   color: #f2f2f2;
   text-decoration: none;
+}
+
+.header {
+  @include google-font;
+
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  h2 {
+    font-size: 24px;
+    font-weight: bold;
+
+    @include mobile {
+      margin-bottom: $spacing * 2;
+    }
+  }
+
+  li {
+    display: inline-block;
+
+    &:not(:last-child)::after {
+      content: '\2022';
+      opacity: .75;
+    }
+
+    a {
+      padding: 3px;
+
+      &:not(.active) {
+        opacity: .75;
+        transition: opacity 150ms ease-in-out;
+
+        &:hover {
+          opacity: 1;
+          transition-duration: 75ms;
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  margin-top: 48px;
+  @include google-font;
+  letter-spacing: .25px;
+  font-size: 12px;
+  text-align: center;
+  opacity: .55;
+}
+
+.page-heading {
+  margin-bottom: $spacing * 2;
+  font-size: 36px;
+  @include google-font;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: .5px;
 }

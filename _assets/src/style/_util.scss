@@ -1,13 +1,44 @@
-$breakpoint: 679px;
+$spacing: 6px;
+
+$narrow: 820px;
+$mobile: 679px;
 
 @mixin desktop {
-  @media (min-width: $breakpoint + 1px) {
+  @media (min-width: $mobile + 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-wide {
+  @media (min-width: $narrow + 1px) {
+    @content;
+  }
+}
+
+@mixin desktop-narrow {
+  @media (min-width: $mobile + 1px) and (max-width: $narrow) {
     @content;
   }
 }
 
 @mixin mobile {
-  @media (max-width: $breakpoint) {
+  @media (max-width: $mobile) {
     @content;
+  }
+}
+
+@mixin google-font {
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+@mixin fade-in-hover($from, $to: 1, $in: 100ms, $out: 150ms) {
+  opacity: $from;
+  transition-property: opacity;
+  transition-timing-function: ease;
+  transition-duration: $out;
+
+  &:hover {
+    opacity: $to;
+    transition-duration: $in;
   }
 }

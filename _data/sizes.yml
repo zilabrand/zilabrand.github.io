@@ -1,0 +1,6 @@
+thumbnail: https://res.cloudinary.com/zilabrand/image/upload/dpr_auto,f_auto,q_auto,c_fill,g_center,h_231,w_231
+# Max out at 1500 width but otherwise scale to 100vw
+# Should be used with sizes="100vw" on HTML image tag
+full: https://res.cloudinary.com/zilabrand/image/upload/dpr_auto,f_auto,q_auto,c_scale,w_auto:150/c_limit,w_1500
+archive-small: https://res.cloudinary.com/zilabrand/image/upload/dpr_auto,f_auto,q_auto,c_fill,g_center,h_216,w_312
+archive-large: https://res.cloudinary.com/zilabrand/image/upload/dpr_auto,f_auto,q_auto,c_fill,g_center,h_288,w_960

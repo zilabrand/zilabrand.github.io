@@ -1,3 +1,4 @@
 ---
-layout: construction
+layout: archive
+title: Home
 ---

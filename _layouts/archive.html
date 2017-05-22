@@ -1,0 +1,52 @@
+---
+layout: default
+---
+
+{% unless page.url == "/" %}
+  <h1 class="page-heading">{{ page.title }}</h1>
+{% endunless %}
+
+{% assign trimmed_content = content | strip %}
+{% unless trimmed_content == "" %}
+  <div class="archive-content">
+    {{ content }}
+  </div>
+{% endunless %}
+
+{% assign this_parts_size_plus = page.url | remove_first: "/" | split: "/" | size | plus: 1 %}
+
+{% assign sorted_pages = site.pages | sort: "order" %}
+
+{% for sub_page in sorted_pages %}
+  {% if sub_page.url contains page.url and sub_page.url != page.url and sub_page.url != "/" and sub_page.url != "/about/" %}
+    {% assign sub_parts = sub_page.url | remove_first: "/" | split: "/" %}
+    {% assign sub_parts_size = sub_parts | size %}
+
+    {% if sub_parts_size == this_parts_size_plus and sub_page.is_main_feature %}
+      <a class="archive-link archive-main"
+        href="{{ sub_page.url }}"
+        style="background-image: url({{ site.data.sizes.archive-large }}/{{ sub_page.featured_image }})"
+      >
+        <span>{{ sub_page.title }}</span>
+      </a>
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+<div class="archive-cols">
+  {% for sub_page in sorted_pages %}
+    {% if sub_page.url contains page.url and sub_page.url != page.url and sub_page.url != "/" and sub_page.url != "/about/" %}
+      {% assign sub_parts = sub_page.url | remove_first: "/" | split: "/" %}
+      {% assign sub_parts_size = sub_parts | size %}
+
+      {% if sub_parts_size == this_parts_size_plus and sub_page.is_main_feature != true %}
+        <a class="archive-link"
+          href="{{ sub_page.url }}"
+          style="background-image: url({{ site.data.sizes.archive-small }}/{{ sub_page.featured_image }})"
+        >
+          <span>{{ sub_page.title }}</span>
+        </a>
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
