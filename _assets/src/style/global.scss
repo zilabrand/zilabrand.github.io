@@ -22,9 +22,9 @@ body {
 
 .container {
   max-width: 960px;
-  margin: 36px auto;
-  padding-left: 12px;
-  padding-right: 12px;
+  margin: ($spacing * 6) auto;
+  padding-left: $spacing * 2;
+  padding-right: $spacing * 2;
 }
 
 a {
@@ -33,16 +33,25 @@ a {
 }
 
 .header {
+  @include google-font;
+
+  @include desktop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
   h2 {
-    @include google-font;
     font-size: 24px;
     font-weight: bold;
+
+    @include mobile {
+      margin-bottom: $spacing * 2;
+    }
   }
 
   li {
     display: inline-block;
-    @include google-font;
 
     &:not(:last-child)::after {
       content: '\2022';
@@ -62,12 +71,6 @@ a {
         }
       }
     }
-  }
-
-  @include desktop {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
   }
 }
 
