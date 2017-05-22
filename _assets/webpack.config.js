@@ -19,7 +19,6 @@ module.exports = {
     path: path.resolve(__dirname, '../'),
     filename: '_script.js',
   },
-  devtool: 'source-map',
   module: {
     rules: [
       {

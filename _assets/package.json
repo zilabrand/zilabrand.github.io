@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "NODE_ENV=dev webpack -d --progress --devtool source-map",
     "watch": "NODE_ENV=dev webpack -d --progress --watch --devtool source-map",
-    "prod": "NODE_ENV=prod webpack -p --progress"
+    "prod": "NODE_ENV=prod webpack -p --progress --devtool false"
   },
   "devDependencies": {
     "autoprefixer": "^7.1",
